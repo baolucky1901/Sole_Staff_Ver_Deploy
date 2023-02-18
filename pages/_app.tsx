@@ -26,8 +26,8 @@ interface TokyoAppProps extends AppProps {
 }
 
 function TokyoApp(props: TokyoAppProps) {
-  const { emotionCache = clientSideEmotionCache } = props;
-  // const getLayout = Component.getLayout ?? ((page) => page);
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const getLayout = Component.getLayout ?? ((page) => page);
 
   Router.events.on('routeChangeStart', nProgress.start);
   Router.events.on('routeChangeError', nProgress.done);
@@ -46,7 +46,7 @@ function TokyoApp(props: TokyoAppProps) {
         <ThemeProvider>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <CssBaseline />
-            {/* {getLayout(<Component {...pageProps} />)} */}
+            {getLayout(<Component {...pageProps} />)}
           </LocalizationProvider>
         </ThemeProvider>
       </SidebarProvider>
